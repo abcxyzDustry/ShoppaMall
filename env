@@ -1,0 +1,58 @@
+# Server Configuration
+NODE_ENV=development
+PORT=5000
+
+# MongoDB Atlas Configuration
+MONGODB_URI=mongodb+srv://djthewolf9_db_user:3n2d1XIL5dNetmNx@cluster0.fs703g5.mongodb.net/shoppamall?retryWrites=true&w=majority&appName=Cluster0
+
+# JWT Configuration
+JWT_SECRET=shoppamall_super_secret_key_2024_change_this_in_production
+JWT_EXPIRE=30d
+JWT_REFRESH_SECRET=shoppamall_refresh_secret_key_2024
+JWT_REFRESH_EXPIRE=90d
+
+# Admin Configuration
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=admin123
+ADMIN_EMAIL=admin@shoppamall.com
+
+# Security
+BCRYPT_SALT_ROUNDS=12
+SESSION_SECRET=shoppamall_session_secret_2024
+
+# Rate Limiting
+RATE_LIMIT_WINDOW=15
+RATE_LIMIT_MAX_REQUESTS=100
+
+# Bot Configuration
+BOT_FREQUENCY=15
+BOT_TRANSACTION_COUNT=100
+BOT_MAX_AMOUNT=10000000
+
+# QR Code Configuration
+QR_BANK=VIB
+QR_ACCOUNT=068394585
+QR_TEMPLATE=compact
+
+# Commission Rates (VNĐ)
+COMMISSION_LEVEL_1=1500
+COMMISSION_LEVEL_2=2200
+COMMISSION_LEVEL_3=3300
+COMMISSION_LEVEL_4=4000
+COMMISSION_LEVEL_5=5500
+
+# Withdrawal Limits (VNĐ)
+WITHDRAW_MIN=100000
+WITHDRAW_MAX=5000000
+MINIMUM_BALANCE_FOR_WITHDRAW=50000
+
+# Logging
+LOG_LEVEL=info
+LOG_FILE=logs/app.log
+ERROR_LOG_FILE=logs/error.log
+
+# Features
+ENABLE_BOTS=true
+ENABLE_NOTIFICATIONS=true
+ENABLE_EMAIL=false
+ENABLE_SMS=false

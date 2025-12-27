@@ -1,0 +1,5 @@
+2025-12-26 01:14:31:1431 [31merror[39m: [31munhandledRejection: Connection.prototype.close() no longer accepts a callback[39m
+[31mMongooseError: Connection.prototype.close() no longer accepts a callback[39m
+[31m    at NativeConnection.close (/home/runner/workspace/node_modules/mongoose/lib/connection.js:856:11)[39m
+[31m    at process.<anonymous> (/home/runner/workspace/server.js:132:25)[39m
+[31m    at process.emit (node:events:524:28)[39m

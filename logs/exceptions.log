@@ -1,0 +1,48 @@
+2025-12-24 15:19:57:1957 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m
+2025-12-24 15:28:31:2831 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m
+2025-12-24 15:39:24:3924 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m
+2025-12-24 15:41:54:4154 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m
+2025-12-25 07:27:09:279 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m
+2025-12-25 09:41:53:4153 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m
+2025-12-26 01:12:43:1243 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m
+2025-12-26 01:14:24:1424 [31merror[39m: [31muncaughtException: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31mError: listen EADDRINUSE: address already in use 0.0.0.0:5000[39m
+[31m    at Server.setupListenHandle [as _listen2] (node:net:1908:16)[39m
+[31m    at listenInCluster (node:net:1965:12)[39m
+[31m    at doListen (node:net:2139:7)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:83:21)[39m

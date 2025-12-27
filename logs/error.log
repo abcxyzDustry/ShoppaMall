@@ -1,0 +1,38 @@
+2025-12-25 01:45:41:4541 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 01:45:43:4543 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 01:45:50:4550 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 01:45:52:4552 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 01:45:53:4553 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 01:45:57:4557 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 01:46:02:462 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 02:04:38:438 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 02:04:40:440 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 02:04:42:442 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 02:04:52:452 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 07:29:34:2934 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 07:29:36:2936 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 07:29:48:2948 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 07:29:49:2949 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 08:29:49:2949 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 08:29:49:2949 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 08:29:50:2950 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 08:29:51:2951 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 08:29:51:2951 [31merror[39m: [31mAuthentication error:[39m
+2025-12-25 08:31:38:3138 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:14:31:1431 [31merror[39m: [31munhandledRejection: Connection.prototype.close() no longer accepts a callback[39m
+[31mMongooseError: Connection.prototype.close() no longer accepts a callback[39m
+[31m    at NativeConnection.close (/home/runner/workspace/node_modules/mongoose/lib/connection.js:856:11)[39m
+[31m    at process.<anonymous> (/home/runner/workspace/server.js:132:25)[39m
+[31m    at process.emit (node:events:524:28)[39m
+2025-12-26 01:34:31:3431 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:34:33:3433 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:34:35:3435 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:34:37:3437 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:34:38:3438 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:34:38:3438 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:37:15:3715 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:37:16:3716 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:37:18:3718 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:37:21:3721 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:37:22:3722 [31merror[39m: [31mAuthentication error:[39m
+2025-12-26 01:37:24:3724 [31merror[39m: [31mAuthentication error:[39m

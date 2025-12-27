@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoppaMall - Đặt đơn ảo kiếm tiền thật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #0f172a;
+            --darker: #020617;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), #1e1b4b, var(--dark));
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #ee4d2d, #ff7337);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 8px 32px rgba(238, 77, 45, 0.3);
+        }
+
+        .login-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff7337, #ee4d2d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #475569, #334155);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--secondary), #059669);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+        }
+
+        .switch-form {
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .switch-form a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Main App Styles */
+        .app-container {
+            display: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .balance-card {
+            padding: 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(16, 185, 129, 0.2));
+        }
+
+        .balance-amount {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+            background: linear-gradient(90deg, #ff7337, #ee4d2d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Banner và giao dịch ảo */
+        .banner-container {
+            margin: 0 0 20px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner-slide {
+            width: 100%;
+            padding: 25px 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(16, 185, 129, 0.3));
+            text-align: center;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .banner-slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .banner-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .fake-transactions-container {
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .fake-transactions-container::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .fake-transactions-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .fake-transactions-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .transaction-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-user {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .transaction-detail {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .transaction-amount {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        .transaction-time {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        .banner-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .banner-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .banner-dot.active {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        .marquee-container {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1));
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 0 0 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 40px;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .stats-counter {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .stat-counter-item {
+            padding: 15px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .counter-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .counter-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .success-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--secondary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .nav-item {
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .page-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 24px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .platform-card {
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .platform-card.shopee {
+            background: linear-gradient(135deg, rgba(238, 77, 45, 0.2), rgba(255, 115, 55, 0.2));
+        }
+
+        .platform-card.lazada {
+            background: linear-gradient(135deg, rgba(0, 168, 255, 0.2), rgba(0, 114, 255, 0.2));
+        }
+
+        .platform-card.tiki {
+            background: linear-gradient(135deg, rgba(26, 148, 49, 0.2), rgba(34, 197, 94, 0.2));
+        }
+
+        .platform-card.taobao {
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.2), rgba(255, 153, 0, 0.2));
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .level-card {
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .level-card.locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        .level-card.active {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(16, 185, 129, 0.3));
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .task-card {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .deposit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .deposit-option {
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .qr-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .qr-container img {
+            max-width: 200px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .history-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .withdraw-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--secondary);
+        }
+
+        .status-failed {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .note-box {
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .level-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .deposit-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .task-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-counter {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login/Register Page -->
+    <div class="login-container">
+        <div class="login-card glass">
+            <div class="logo">S</div>
+            <h1 class="login-title">ShoppaMall</h1>
+            <p class="login-subtitle">Đặt đơn ảo kiếm tiền thật</p>
+            
+            <div id="login-form">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" class="form-control" placeholder="Nhập tên đăng nhập">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu">
+                </div>
+                <button class="btn btn-primary" onclick="login()">
+                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                </button>
+                <div class="switch-form">
+                    Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký ngay</a>
+                </div>
+            </div>
+            
+            <div id="register-form" style="display: none;">
+                <div class="form-group">
+                    <label for="reg-username">Tên đăng nhập</label>
+                    <input type="text" id="reg-username" class="form-control" placeholder="Nhập tên đăng nhập">
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Mật khẩu</label>
+                    <input type="password" id="reg-password" class="form-control" placeholder="Nhập mật khẩu">
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm">Xác nhận mật khẩu</label>
+                    <input type="password" id="reg-confirm" class="form-control" placeholder="Xác nhận mật khẩu">
+                </div>
+                <button class="btn btn-success" onclick="register()">
+                    <i class="fas fa-user-plus"></i> Đăng ký
+                </button>
+                <div class="switch-form">
+                    Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app-container container">
+        <div class="header glass">
+            <div class="user-info">
+                <div class="user-avatar" id="user-avatar">U</div>
+                <div>
+                    <div id="user-name">Người dùng</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);" id="user-id">ID: 0000</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 12px; color: var(--text-secondary);">Số dư khả dụng</div>
+                <div class="balance-amount" id="user-balance">0 VNĐ</div>
+            </div>
+        </div>
+
+        <div class="balance-card glass">
+            <div style="font-size: 14px; color: var(--text-secondary);">Tổng số dư</div>
+            <div class="balance-amount" id="total-balance">0 VNĐ</div>
+            <div style="font-size: 12px; color: var(--text-secondary);">
+                <span id="commission-balance">Hoa hồng: 0 VNĐ</span> • 
+                <span id="deposit-balance">Đã nạp: 0 VNĐ</span>
+            </div>
+        </div>
+
+        <!-- Banner Section -->
+        <div class="banner-container glass" id="banner-container">
+            <div class="banner-slide active" id="banner-slide-1">
+                <div class="banner-icon">🎉</div>
+                <h4>Chào mừng đến với ShoppaMall!</h4>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-top: 5px;">
+                    Đặt đơn ảo - Kiếm tiền thật mỗi ngày
+                </p>
+            </div>
+            <div class="banner-slide" id="banner-slide-2">
+                <div class="banner-icon">💰</div>
+                <h4>Thu nhập thụ động</h4>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-top: 5px;">
+                    Kiếm tiền ngay cả khi bạn đang ngủ
+                </p>
+            </div>
+            <div class="banner-slide" id="banner-slide-3">
+                <div class="banner-icon">⚡</div>
+                <h4>Rút tiền nhanh chóng</h4>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-top: 5px;">
+                    Rút tiền chỉ trong 5-10 phút
+                </p>
+            </div>
+            <div class="banner-controls">
+                <div class="banner-dot active" onclick="showBannerSlide(0)"></div>
+                <div class="banner-dot" onclick="showBannerSlide(1)"></div>
+                <div class="banner-dot" onclick="showBannerSlide(2)"></div>
+            </div>
+        </div>
+
+        <!-- Marquee Chạy Tin Tức -->
+        <div class="marquee-container glass" id="marquee-container" style="display: none;">
+            <div class="marquee-content" id="marquee-content">
+                <!-- Marquee items will be added dynamically -->
+            </div>
+        </div>
+
+        <!-- Stats Counter -->
+        <div class="stats-counter glass" id="stats-counter">
+            <div class="stat-counter-item">
+                <div class="counter-value" id="counter-users">0</div>
+                <div class="counter-label">Thành viên</div>
+            </div>
+            <div class="stat-counter-item">
+                <div class="counter-value" id="counter-deposits">0</div>
+                <div class="counter-label">Đã nạp</div>
+            </div>
+            <div class="stat-counter-item">
+                <div class="counter-value" id="counter-withdraws">0</div>
+                <div class="counter-label">Đã rút</div>
+            </div>
+            <div class="stat-counter-item">
+                <div class="counter-value" id="counter-tasks">0</div>
+                <div class="counter-label">Nhiệm vụ</div>
+            </div>
+        </div>
+
+        <!-- Fake Transactions Feed -->
+        <div class="glass fake-transactions-container" id="fake-transactions-feed" style="display: none;">
+            <h4 style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                <span>📊 Giao dịch gần đây</span>
+                <span style="font-size: 12px; color: var(--text-secondary);">Cập nhật liên tục</span>
+            </h4>
+            <div id="transactions-list">
+                <!-- Fake transactions will be loaded here -->
+            </div>
+        </div>
+
+        <div class="nav-menu">
+            <div class="nav-item glass" onclick="showPage('orders')">
+                <div class="nav-icon"><i class="fas fa-shopping-cart"></i></div>
+                <div>Đặt đơn</div>
+            </div>
+            <div class="nav-item glass" onclick="showPage('deposit')">
+                <div class="nav-icon"><i class="fas fa-wallet"></i></div>
+                <div>Nạp tiền</div>
+            </div>
+            <div class="nav-item glass" onclick="showPage('withdraw')">
+                <div class="nav-icon"><i class="fas fa-money-bill-wave"></i></div>
+                <div>Rút tiền</div>
+            </div>
+            <div class="nav-item glass" onclick="showPage('account')">
+                <div class="nav-icon"><i class="fas fa-user"></i></div>
+                <div>Tài khoản</div>
+            </div>
+        </div>
+
+        <!-- Orders Page -->
+        <div id="orders-page" class="page-content">
+            <div class="glass" style="padding: 20px; margin-bottom: 20px;">
+                <h3 style="margin-bottom: 15px;">Chọn nền tảng đặt đơn</h3>
+                <div class="platform-grid">
+                    <div class="platform-card glass shopee" onclick="selectPlatform('shopee')">
+                        <img src="/IMG_0043.jpeg" style="width: 50px; height: 50px; margin-bottom: 10px; object-fit: contain;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">Shopee</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Đặt đơn Shopee</div>
+                    </div>
+                    <div class="platform-card glass lazada" onclick="selectPlatform('lazada')">
+                        <img src="/IMG_0044.png" style="width: 50px; height: 50px; margin-bottom: 10px; object-fit: contain;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">Lazada</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Đặt đơn Lazada</div>
+                    </div>
+                    <div class="platform-card glass tiki" onclick="selectPlatform('tiki')">
+                        <img src="/IMG_0045.jpeg" style="width: 50px; height: 50px; margin-bottom: 10px; object-fit: contain;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">Tiki</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Đặt đơn Tiki</div>
+                    </div>
+                    <div class="platform-card glass taobao" onclick="selectPlatform('taobao')">
+                        <img src="/IMG_0046.png" style="width: 50px; height: 50px; margin-bottom: 10px; object-fit: contain;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">Taobao</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Đặt đơn Taobao</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="platform-tasks" style="display: none;">
+                <div class="glass" style="padding: 20px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;" id="platform-title">Nhiệm vụ Shopee</h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">Chọn cấp độ:</div>
+                        <div class="level-grid">
+                            <div class="level-card glass active" onclick="selectLevel(1)">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Cấp 1</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">1.500 VNĐ</div>
+                            </div>
+                            <div class="level-card glass locked" onclick="selectLevel(2)">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Cấp 2</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">2.200 VNĐ</div>
+                                <div style="font-size: 10px; color: var(--warning);">🔒</div>
+                            </div>
+                            <div class="level-card glass locked" onclick="selectLevel(3)">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Cấp 3</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">3.300 VNĐ</div>
+                                <div style="font-size: 10px; color: var(--warning);">🔒</div>
+                            </div>
+                            <div class="level-card glass locked" onclick="selectLevel(4)">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Cấp 4</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">4.000 VNĐ</div>
+                                <div style="font-size: 10px; color: var(--warning);">🔒</div>
+                            </div>
+                            <div class="level-card glass locked" onclick="selectLevel(5)">
+                                <div style="font-weight: bold; margin-bottom: 5px;">Cấp 5</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">5.500 VNĐ</div>
+                                <div style="font-size: 10px; color: var(--warning);">🔒</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="tasks-container">
+                        <!-- Tasks will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deposit Page -->
+        <div id="deposit-page" class="page-content">
+            <div class="glass" style="padding: 20px; margin-bottom: 20px;">
+                <h3 style="margin-bottom: 15px;">Nạp tiền vào tài khoản</h3>
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">Chọn số tiền nạp:</div>
+                    <div class="deposit-grid">
+                        <div class="deposit-option glass" onclick="selectDepositAmount(50000)">
+                            <div style="font-size: 20px; font-weight: bold; margin-bottom: 5px;">50K</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">50.000 VNĐ</div>
+                        </div>
+                        <div class="deposit-option glass" onclick="selectDepositAmount(100000)">
+                            <div style="font-size: 20px; font-weight: bold; margin-bottom: 5px;">100K</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">100.000 VNĐ</div>
+                        </div>
+                        <div class="deposit-option glass" onclick="selectDepositAmount(200000)">
+                            <div style="font-size: 20px; font-weight: bold; margin-bottom: 5px;">200K</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">200.000 VNĐ</div>
+                        </div>
+                        <div class="deposit-option glass" onclick="selectDepositAmount(500000)">
+                            <div style="font-size: 20px; font-weight: bold; margin-bottom: 5px;">500K</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">500.000 VNĐ</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="qr-container" style="display: none;">
+                    <div class="qr-container">
+                        <img id="qr-image" src="" alt="QR Code">
+                        <div style="margin-bottom: 15px;">
+                            <div style="font-weight: bold; margin-bottom: 5px;">Thông tin chuyển khoản:</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">
+                                Ngân hàng: VIB<br>
+                                Số TK: 068394585<br>
+                                Số tiền: <span id="deposit-amount">0</span> VNĐ<br>
+                                Nội dung: nap tien tai khoan
+                            </div>
+                        </div>
+                        <button class="btn btn-success" onclick="confirmDeposit()">
+                            <i class="fas fa-check-circle"></i> Tôi đã chuyển khoản
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass" style="padding: 20px;">
+                <h3 style="margin-bottom: 15px;">Lịch sử nạp tiền</h3>
+                <button class="btn btn-secondary" onclick="loadDepositHistory()" style="margin-bottom: 15px;">
+                    <i class="fas fa-sync-alt"></i> Tải lại lịch sử
+                </button>
+                <div style="overflow-x: auto;">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>Số tiền</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="deposit-history">
+                            <!-- Deposit history will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdraw Page -->
+        <div id="withdraw-page" class="page-content">
+            <div class="glass" style="padding: 20px; margin-bottom: 20px;">
+                <h3 style="margin-bottom: 15px;">Rút tiền</h3>
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 14px; color: var(--text-secondary);">Số dư khả dụng:</div>
+                    <div class="balance-amount" id="withdraw-balance">0 VNĐ</div>
+                </div>
+                
+                <div id="withdraw-form">
+                    <div class="form-group">
+                        <label for="withdraw-amount">Số tiền rút (Min: 100K - Max: 5TR)</label>
+                        <input type="number" id="withdraw-amount" class="form-control" placeholder="Nhập số tiền muốn rút" min="100000" max="5000000">
+                    </div>
+                    <div class="form-group">
+                        <label for="bank-name">Tên ngân hàng</label>
+                        <input type="text" id="bank-name" class="form-control" placeholder="Ví dụ: VIB">
+                    </div>
+                    <div class="form-group">
+                        <label for="account-number">Số tài khoản</label>
+                        <input type="text" id="account-number" class="form-control" placeholder="Nhập số tài khoản">
+                    </div>
+                    <button class="btn btn-primary" onclick="submitWithdraw()">
+                        <i class="fas fa-paper-plane"></i> Gửi yêu cầu rút tiền
+                    </button>
+                </div>
+                
+                <div id="withdraw-info" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+                    <div style="font-size: 12px; color: var(--text-secondary);">
+                        ⚠️ Lưu ý: Số tiền rút sẽ bị trừ ngay khi gửi yêu cầu. Nếu yêu cầu bị huỷ, số tiền sẽ được hoàn lại.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass" style="padding: 20px;">
+                <h3 style="margin-bottom: 15px;">Lịch sử rút tiền</h3>
+                <button class="btn btn-secondary" onclick="loadWithdrawHistory()" style="margin-bottom: 15px;">
+                    <i class="fas fa-sync-alt"></i> Tải lại lịch sử
+                </button>
+                <div style="overflow-x: auto;">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>Số tiền</th>
+                                <th>Ngân hàng</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="withdraw-history">
+                            <!-- Withdraw history will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Page -->
+        <div id="account-page" class="page-content">
+            <div class="glass" style="padding: 20px; margin-bottom: 20px;">
+                <h3 style="margin-bottom: 15px;">Thông tin tài khoản</h3>
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <div class="user-avatar" style="width: 60px; height: 60px;" id="account-avatar">U</div>
+                        <div>
+                            <div style="font-weight: bold; font-size: 18px;" id="account-name">Người dùng</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);" id="account-id">ID: 0000</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;">
+                        <div class="glass" style="padding: 15px; text-align: center;">
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 5px;">Tổng tiền đã nạp</div>
+                            <div style="font-weight: bold; font-size: 18px;" id="total-deposited">0 VNĐ</div>
+                        </div>
+                        <div class="glass" style="padding: 15px; text-align: center;">
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 5px;">Nhiệm vụ đã làm</div>
+                            <div style="font-weight: bold; font-size: 18px;" id="tasks-completed">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <i class="fas fa-exclamation-circle" style="color: var(--warning);"></i>
+                            <div style="font-weight: bold;">Lưu ý quan trọng</div>
+                        </div>
+                        <div style="font-size: 14px;">
+                            Bạn cần duy trì số tiền nạp tối thiểu 50K để có thể rút tiền khỏi tài khoản.
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-danger" onclick="logout()" style="margin-top: 20px; width: 100%;">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Info Modal -->
+    <div id="platform-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3 id="modal-title">Thông tin nền tảng</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modal-content" style="padding: 20px;">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Locked Modal -->
+    <div id="level-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3>Cấp độ bị khoá</h3>
+                <button class="close-modal" onclick="closeLevelModal()">&times;</button>
+            </div>
+            <div style="padding: 20px; text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 20px;">🔒</div>
+                <h3 style="margin-bottom: 10px;">Cấp độ chưa được mở khoá</h3>
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">
+                    Bạn cần nạp tiền để mở khoá cấp độ cao hơn và nhận hoa hồng cao hơn.
+                </p>
+                <img src="https://qr.sepay.vn/img?bank=VIB&acc=068394585&template=compact&amount=50000&des=nap+tien+tai+khoan" 
+                     alt="QR Nạp tiền" style="max-width: 200px; margin-bottom: 20px; border-radius: 8px;">
+                <button class="btn btn-primary" onclick="showPage('deposit')">
+                    <i class="fas fa-wallet"></i> Nạp tiền ngay
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Completed Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3>Nhiệm vụ hoàn thành</h3>
+                <button class="close-modal" onclick="closeTaskModal()">&times;</button>
+            </div>
+            <div style="padding: 20px; text-align: center;">
+                <div style="font-size: 48px; color: var(--secondary); margin-bottom: 20px;">✅</div>
+                <h3 style="margin-bottom: 10px;">Nhiệm vụ đã được ghi nhận!</h3>
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">
+                    Bạn đã nhận được <span id="task-reward" style="color: var(--secondary); font-weight: bold;">1.500 VNĐ</span> hoa hồng.
+                </p>
+                <button class="btn btn-success" onclick="closeTaskModal()">
+                    <i class="fas fa-check"></i> Đã hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // User data
+        let currentUser = null;
+        let userData = {
+            balance: 0,
+            commission: 0,
+            deposited: 0,
+            level: 1,
+            tasksCompleted: 0,
+            selectedPlatform: null
+        };
+
+        // Platform information
+        const platforms = {
+            shopee: {
+                name: "Shopee",
+                description: "Shopee là nền tảng thương mại điện tử hàng đầu tại Đông Nam Á và Đài Loan. Được ra mắt tại Singapore năm 2015, Shopee hiện đã có mặt tại 13 thị trường trên toàn cầu.",
+                color: "#ee4d2d"
+            },
+            lazada: {
+                name: "Lazada",
+                description: "Lazada là nền tảng thương mại điện tử hàng đầu tại Đông Nam Á. Thành lập năm 2012, Lazada được Alibaba mua lại và trở thành một trong những đơn vị thương mại điện tử lớn nhất khu vực.",
+                color: "#0f6cb2"
+            },
+            tiki: {
+                name: "Tiki",
+                description: "Tiki là một trong những sàn thương mại điện tử lớn nhất tại Việt Nam. Được thành lập năm 2010, Tiki nổi tiếng với dịch vụ giao hàng nhanh và chất lượng dịch vụ khách hàng.",
+                color: "#1a9431"
+            },
+            taobao: {
+                name: "Taobao",
+                description: "Taobao là trang web thương mại điện tử C2C lớn nhất Trung Quốc, thuộc sở hữu của Tập đoàn Alibaba. Taobao được thành lập năm 2003 và hiện có hàng triệu sản phẩm từ các nhà bán lẻ.",
+                color: "#ff6600"
+            }
+        };
+
+        // Commission rates per level
+        const commissionRates = {
+            1: 1500,
+            2: 2200,
+            3: 3300,
+            4: 4000,
+            5: 5500
+        };
+
+        // Banner và fake transactions
+        let currentBannerSlide = 0;
+        let bannerInterval;
+        let fakeTransactions = [];
+        let fakeUsers = [];
+        let fakeTransactionInterval;
+        let stats = {
+            totalUsers: 0,
+            totalDeposits: 0,
+            totalWithdraws: 0,
+            totalTasks: 0
+        };
+
+        // Danh sách tên người dùng ảo
+        const fakeUserNames = [
+            'Nguyễn Văn A', 'Trần Thị B', 'Lê Văn C', 'Phạm Thị D', 'Hoàng Văn E',
+            'Vũ Văn F', 'Đặng Thị G', 'Bùi Văn H', 'Đỗ Thị I', 'Hồ Văn K',
+            'Ngô Thị L', 'Trương Văn M', 'Lý Thị N', 'Mai Văn O', 'Cao Thị P'
+        ];
+
+        // Danh sách ngân hàng ảo
+        const fakeBanks = ['VIB', 'Vietcombank', 'Techcombank', 'MB Bank', 'ACB', 'TP Bank', 'VP Bank'];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    const savedData = localStorage.getItem(`userData_${currentUser.id}`);
+                    if (savedData) {
+                        userData = JSON.parse(savedData);
+                    }
+                    showApp();
+                } catch (e) {
+                    console.error('Error loading user data:', e);
+                }
+            }
+            
+            // Khởi tạo banner
+            startBannerRotation();
+            
+            // Kiểm tra và khởi động bots
+            checkAndStartBots();
+            
+            // Cập nhật stats
+            updateStats();
+            
+            // Load fake transactions
+            loadFakeTransactions();
+        });
+
+        // Login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                alert('Vui lòng nhập đầy đủ thông tin đăng nhập');
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                const savedData = localStorage.getItem(`userData_${user.id}`);
+                if (savedData) {
+                    userData = JSON.parse(savedData);
+                }
+                
+                showApp();
+            } else {
+                alert('Sai tên đăng nhập hoặc mật khẩu');
+            }
+        }
+
+        // Register function
+        function register() {
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const confirm = document.getElementById('reg-confirm').value;
+            
+            if (!username || !password || !confirm) {
+                alert('Vui lòng nhập đầy đủ thông tin');
+                return;
+            }
+            
+            if (password !== confirm) {
+                alert('Mật khẩu xác nhận không khớp');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Mật khẩu phải có ít nhất 6 ký tự');
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.some(u => u.username === username)) {
+                alert('Tên đăng nhập đã tồn tại');
+                return;
+            }
+            
+            const newUser = {
+                id: Date.now().toString(),
+                username: username,
+                password: password,
+                created: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            userData = {
+                balance: 0,
+                commission: 0,
+                deposited: 0,
+                level: 1,
+                tasksCompleted: 0,
+                selectedPlatform: null
+            };
+            
+            localStorage.setItem(`userData_${newUser.id}`, JSON.stringify(userData));
+            
+            alert('Đăng ký thành công! Vui lòng đăng nhập.');
+            showLogin();
+        }
+
+        // Show login form
+        function showLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+        }
+
+        // Show register form
+        function showRegister() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        // Show main app
+        function showApp() {
+            document.querySelector('.login-container').style.display = 'none';
+            document.querySelector('.app-container').style.display = 'block';
+            
+            document.getElementById('user-name').textContent = currentUser.username;
+            document.getElementById('user-id').textContent = `ID: ${currentUser.id.substring(0, 8)}`;
+            document.getElementById('user-avatar').textContent = currentUser.username.charAt(0).toUpperCase();
+            document.getElementById('account-name').textContent = currentUser.username;
+            document.getElementById('account-id').textContent = `ID: ${currentUser.id.substring(0, 8)}`;
+            document.getElementById('account-avatar').textContent = currentUser.username.charAt(0).toUpperCase();
+            
+            updateBalances();
+            showPage('orders');
+        }
+
+        // Update balances
+        function updateBalances() {
+            const totalBalance = userData.balance + userData.commission;
+            
+            document.getElementById('user-balance').textContent = formatCurrency(totalBalance);
+            document.getElementById('total-balance').textContent = formatCurrency(totalBalance);
+            document.getElementById('commission-balance').textContent = `Hoa hồng: ${formatCurrency(userData.commission)}`;
+            document.getElementById('deposit-balance').textContent = `Đã nạp: ${formatCurrency(userData.deposited)}`;
+            document.getElementById('withdraw-balance').textContent = formatCurrency(totalBalance);
+            document.getElementById('total-deposited').textContent = formatCurrency(userData.deposited);
+            document.getElementById('tasks-completed').textContent = userData.tasksCompleted;
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { 
+                style: 'currency', 
+                currency: 'VND' 
+            }).format(amount);
+        }
+
+        // Show page
+        function showPage(page) {
+            document.querySelectorAll('.page-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            document.getElementById(`${page}-page`).classList.add('active');
+            
+            if (page === 'deposit') {
+                loadDepositHistory();
+            } else if (page === 'withdraw') {
+                loadWithdrawHistory();
+            }
+        }
+
+        // Banner rotation
+        function startBannerRotation() {
+            bannerInterval = setInterval(() => {
+                currentBannerSlide = (currentBannerSlide + 1) % 3;
+                showBannerSlide(currentBannerSlide);
+            }, 5000);
+        }
+
+        function showBannerSlide(slideIndex) {
+            document.querySelectorAll('.banner-slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            document.querySelectorAll('.banner-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            document.getElementById(`banner-slide-${slideIndex + 1}`).classList.add('active');
+            document.querySelectorAll('.banner-dot')[slideIndex].classList.add('active');
+            currentBannerSlide = slideIndex;
+            
+            clearInterval(bannerInterval);
+            startBannerRotation();
+        }
+
+        // Kiểm tra và khởi động bots
+        function checkAndStartBots() {
+            const botStatus = JSON.parse(localStorage.getItem('botStatus') || '{}');
+            
+            if (botStatus.withdraw || botStatus.notification || botStatus.task) {
+                document.getElementById('marquee-container').style.display = 'block';
+                document.getElementById('fake-transactions-feed').style.display = 'block';
+                
+                initializeFakeData();
+                startFakeTransactions();
+                startMarquee();
+            }
+        }
+
+        // Khởi tạo dữ liệu ảo
+        function initializeFakeData() {
+            fakeUsers = fakeUserNames.map((name, index) => ({
+                id: `FAKE${1000 + index}`,
+                name: name,
+                avatar: name.charAt(0),
+                balance: Math.floor(Math.random() * 5000000) + 1000000
+            }));
+            
+            for (let i = 0; i < 10; i++) {
+                addFakeTransaction();
+            }
+            
+            renderFakeTransactions();
+        }
+
+        // Thêm giao dịch ảo
+        function addFakeTransaction() {
+            const types = ['deposit', 'withdraw', 'task_completed'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            const user = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
+            const now = new Date();
+            
+            let transaction = {
+                id: Date.now() + Math.random(),
+                userId: user.id,
+                userName: user.name,
+                userAvatar: user.avatar,
+                type: type,
+                time: new Date(now.getTime() - Math.random() * 86400000),
+                isNew: Math.random() > 0.5
+            };
+            
+            switch(type) {
+                case 'deposit':
+                    transaction.amount = Math.floor(Math.random() * 2000000) + 50000;
+                    transaction.message = `đã nạp ${formatCurrency(transaction.amount)}`;
+                    transaction.icon = '💰';
+                    stats.totalDeposits += transaction.amount;
+                    break;
+                    
+                case 'withdraw':
+                    transaction.amount = Math.floor(Math.random() * 3000000) + 100000;
+                    transaction.bank = fakeBanks[Math.floor(Math.random() * fakeBanks.length)];
+                    transaction.message = `đã rút ${formatCurrency(transaction.amount)} về ${transaction.bank}`;
+                    transaction.icon = '💳';
+                    stats.totalWithdraws += transaction.amount;
+                    break;
+                    
+                case 'task_completed':
+                    transaction.amount = [1500, 2200, 3300, 4000, 5500][Math.floor(Math.random() * 5)];
+                    transaction.platform = ['Shopee', 'Lazada', 'Tiki', 'Taobao'][Math.floor(Math.random() * 4)];
+                    transaction.message = `hoàn thành nhiệm vụ ${transaction.platform} +${formatCurrency(transaction.amount)}`;
+                    transaction.icon = '✅';
+                    stats.totalTasks++;
+                    break;
+            }
+            
+            stats.totalUsers = fakeUsers.length;
+            
+            fakeTransactions.unshift(transaction);
+            
+            if (fakeTransactions.length > 20) {
+                fakeTransactions = fakeTransactions.slice(0, 20);
+            }
+            
+            addToMarquee(transaction);
+            updateStats();
+            
+            return transaction;
+        }
+
+        // Hiển thị giao dịch ảo
+        function renderFakeTransactions() {
+            const container = document.getElementById('transactions-list');
+            const transactionsToShow = fakeTransactions.slice(0, 8);
+            
+            container.innerHTML = '';
+            
+            transactionsToShow.forEach(transaction => {
+                const timeAgo = getTimeAgo(transaction.time);
+                const transactionEl = document.createElement('div');
+                transactionEl.className = 'transaction-item';
+                transactionEl.innerHTML = `
+                    <div class="transaction-avatar">${transaction.userAvatar}</div>
+                    <div class="transaction-info">
+                        <div class="transaction-user">${transaction.userName}</div>
+                        <div class="transaction-detail">
+                            ${transaction.icon} ${transaction.message}
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="transaction-time">${timeAgo}</div>
+                        ${transaction.isNew ? '<div class="success-badge">MỚI</div>' : ''}
+                    </div>
+                `;
+                container.appendChild(transactionEl);
+            });
+        }
+
+        // Thêm vào marquee
+        function addToMarquee(transaction) {
+            const marqueeContent = document.getElementById('marquee-content');
+            const marqueeItem = document.createElement('div');
+            marqueeItem.className = 'marquee-item';
+            marqueeItem.innerHTML = `
+                ${transaction.icon} 
+                ${transaction.userName.split(' ').pop()} 
+                ${transaction.message}
+            `;
+            marqueeContent.appendChild(marqueeItem);
+            
+            if (marqueeContent.children.length > 20) {
+                marqueeContent.removeChild(marqueeContent.firstChild);
+            }
+        }
+
+        // Bắt đầu tạo giao dịch ảo tự động
+        function startFakeTransactions() {
+            fakeTransactionInterval = setInterval(() => {
+                const newTransaction = addFakeTransaction();
+                renderFakeTransactions();
+                
+                if (newTransaction.isNew) {
+                    showNewTransactionNotification(newTransaction);
+                }
+                
+                localStorage.setItem('fakeTransactions', JSON.stringify(fakeTransactions));
+                localStorage.setItem('fakeStats', JSON.stringify(stats));
+            }, Math.random() * 10000 + 5000);
+        }
+
+        // Hiển thị thông báo giao dịch mới
+        function showNewTransactionNotification(transaction) {
+            const toast = document.createElement('div');
+            toast.className = 'glass';
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px;
+                border-radius: 10px;
+                background: rgba(16, 185, 129, 0.2);
+                border-left: 4px solid var(--secondary);
+                z-index: 9999;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            toast.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="font-size: 20px;">${transaction.icon}</div>
+                    <div>
+                        <div style="font-weight: bold; font-size: 14px;">Giao dịch mới</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                            ${transaction.userName} ${transaction.message}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Cập nhật thống kê
+        function updateStats() {
+            const savedStats = JSON.parse(localStorage.getItem('fakeStats'));
+            if (savedStats) {
+                stats = { ...stats, ...savedStats };
+            }
+            
+            animateCounter('counter-users', stats.totalUsers);
+            animateCounter('counter-deposits', stats.totalDeposits);
+            animateCounter('counter-withdraws', stats.totalWithdraws);
+            animateCounter('counter-tasks', stats.totalTasks);
+        }
+
+        // Hiệu ứng counter
+        function animateCounter(elementId, targetValue) {
+            const element = document.getElementById(elementId);
+            const currentValue = parseInt(element.textContent.replace(/\D/g, '') || 0);
+            
+            if (currentValue === targetValue) return;
+            
+            const increment = targetValue > currentValue ? 1 : -1;
+            const step = Math.max(1, Math.abs(targetValue - currentValue) / 30);
+            
+            function updateCounter() {
+                let nextValue;
+                if (Math.abs(targetValue - currentValue) > 1000) {
+                    nextValue = Math.floor(currentValue + (increment * step));
+                } else {
+                    nextValue = currentValue + increment;
+                }
+                
+                if ((increment > 0 && nextValue >= targetValue) || 
+                    (increment < 0 && nextValue <= targetValue)) {
+                    nextValue = targetValue;
+                }
+                
+                if (elementId.includes('deposits') || elementId.includes('withdraws')) {
+                    element.textContent = formatCurrency(nextValue).replace('₫', '');
+                } else {
+                    element.textContent = nextValue.toLocaleString('vi-VN');
+                }
+                
+                if (nextValue !== targetValue) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            
+            updateCounter();
+        }
+
+        // Bắt đầu marquee
+        function startMarquee() {
+            const marqueeContent = document.getElementById('marquee-content');
+            
+            setInterval(() => {
+                if (marqueeContent.children.length < 10) {
+                    const transaction = addFakeTransaction();
+                    addToMarquee(transaction);
+                }
+            }, 10000);
+        }
+
+        // Hàm tính thời gian đã qua
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 1) return 'Vừa xong';
+            if (diffMins < 60) return `${diffMins} phút trước`;
+            if (diffHours < 24) return `${diffHours} giờ trước`;
+            return `${diffDays} ngày trước`;
+        }
+
+        // Load fake transactions từ localStorage
+        function loadFakeTransactions() {
+            const savedTransactions = JSON.parse(localStorage.getItem('fakeTransactions'));
+            if (savedTransactions && savedTransactions.length > 0) {
+                fakeTransactions = savedTransactions;
+                renderFakeTransactions();
+            }
+        }
+
+        // Select platform
+        function selectPlatform(platform) {
+            userData.selectedPlatform = platform;
+            saveUserData();
+            
+            const platformInfo = platforms[platform];
+            document.getElementById('modal-title').textContent = platformInfo.name;
+            document.getElementById('modal-content').innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <div style="width: 40px; height: 40px; background: ${platformInfo.color}; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                            ${platformInfo.name.charAt(0)}
+                        </div>
+                        <div style="font-weight: bold; font-size: 20px;">${platformInfo.name}</div>
+                    </div>
+                    <p style="margin-bottom: 15px; color: var(--text-secondary); line-height: 1.6;">
+                        ${platformInfo.description}
+                    </p>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">Thông tin hoa hồng:</div>
+                        <div style="color: var(--text-secondary); font-size: 14px;">
+                            Mức hoa hồng phụ thuộc vào cấp độ của bạn. Cấp độ càng cao, hoa hồng càng lớn.
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="showPlatformTasks('${platform}')" style="width: 100%;">
+                    <i class="fas fa-play-circle"></i> Bắt đầu đặt đơn
+                </button>
+            `;
+            document.getElementById('platform-modal').classList.add('active');
+        }
+
+        // Show platform tasks
+        function showPlatformTasks(platform) {
+            closeModal();
+            
+            document.getElementById('platform-title').textContent = `Nhiệm vụ ${platforms[platform].name}`;
+            document.getElementById('platform-tasks').style.display = 'block';
+            
+            updateTasksDisplay();
+        }
+
+        // Update tasks display
+        function updateTasksDisplay() {
+            const tasksContainer = document.getElementById('tasks-container');
+            const platform = platforms[userData.selectedPlatform];
+            const commission = commissionRates[userData.level];
+            
+            let tasksHTML = '<div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">Chọn nhiệm vụ:</div>';
+            tasksHTML += '<div class="task-grid">';
+            
+            tasksHTML += `
+                <div class="task-card glass" onclick="completeTask('${userData.selectedPlatform}', ${userData.level})">
+                    <div style="font-size: 32px; margin-bottom: 10px;">📦</div>
+                    <div style="font-weight: bold; margin-bottom: 5px;">Đặt đơn ${platform.name} Free</div>
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px;">Cấp độ ${userData.level}</div>
+                    <div style="color: var(--secondary); font-weight: bold;">+${formatCurrency(commission)}</div>
+                    <div style="font-size: 11px; color: var(--text-secondary); margin-top: 5px;">Nhấn để hoàn thành</div>
+                </div>
+            `;
+            
+            if (userData.level >= 2) {
+                tasksHTML += `
+                    <div class="task-card glass" onclick="completeTask('${userData.selectedPlatform}', ${userData.level})">
+                        <div style="font-size: 32px; margin-bottom: 10px;">🚚</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">Đặt đơn ${platform.name} Free</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px;">Cấp độ ${userData.level}</div>
+                        <div style="color: var(--secondary); font-weight: bold;">+${formatCurrency(commission)}</div>
+                        <div style="font-size: 11px; color: var(--text-secondary); margin-top: 5px;">Nhấn để hoàn thành</div>
+                    </div>
+                `;
+            }
+            
+            tasksHTML += '</div>';
+            tasksContainer.innerHTML = tasksHTML;
+        }
+
+        // Select level
+        function selectLevel(level) {
+            if (level > userData.level) {
+                document.getElementById('level-modal').classList.add('active');
+            } else {
+                document.querySelectorAll('.level-card').forEach((card, index) => {
+                    card.classList.remove('active');
+                    if (index + 1 === level) {
+                        card.classList.add('active');
+                    }
+                });
+                
+                userData.level = level;
+                saveUserData();
+                updateTasksDisplay();
+            }
+        }
+
+        // Complete task - Call API with 24h cooldown check
+        async function completeTask(platform, level) {
+            try {
+                const response = await fetch('/api/users/tasks/complete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({
+                        platform: platform,
+                        level: level
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Update local data
+                    userData.commission = data.user.commission;
+                    userData.tasksCompleted = data.user.tasksCompleted;
+                    saveUserData();
+                    updateBalances();
+                    
+                    document.getElementById('task-reward').textContent = formatCurrency(data.commission);
+                    document.getElementById('task-modal').classList.add('active');
+                    updateTasksDisplay();
+                } else {
+                    // Show error message
+                    alert('❌ ' + (data.error || 'Lỗi hoàn thành nhiệm vụ'));
+                }
+            } catch (error) {
+                console.error('Task completion error:', error);
+                alert('❌ Lỗi kết nối: ' + error.message);
+            }
+        }
+
+        // Select deposit amount
+        function selectDepositAmount(amount) {
+            document.getElementById('qr-container').style.display = 'block';
+            document.getElementById('deposit-amount').textContent = formatCurrency(amount);
+            
+            const qrAmount = Math.floor(amount);
+            document.getElementById('qr-image').src = 
+                `https://qr.sepay.vn/img?bank=VIB&acc=068394585&template=compact&amount=${qrAmount}&des=nap+tien+tai+khoan`;
+            
+            document.getElementById('qr-container').dataset.amount = amount;
+        }
+
+        // Confirm deposit
+        function confirmDeposit() {
+            const amount = parseInt(document.getElementById('qr-container').dataset.amount);
+            
+            if (!amount || amount < 50000) {
+                alert('Vui lòng chọn số tiền nạp hợp lệ (tối thiểu 50K)');
+                return;
+            }
+            
+            const deposit = {
+                id: Date.now().toString(),
+                userId: currentUser.id,
+                amount: amount,
+                status: 'pending',
+                createdAt: new Date().toISOString()
+            };
+            
+            const deposits = JSON.parse(localStorage.getItem('deposits') || '[]');
+            deposits.push(deposit);
+            localStorage.setItem('deposits', JSON.stringify(deposits));
+            
+            alert('Đã gửi yêu cầu nạp tiền! Vui lòng chờ 15-30 phút để tiền được cộng vào tài khoản.');
+            
+            document.getElementById('qr-container').style.display = 'none';
+            loadDepositHistory();
+        }
+
+        // Load deposit history
+        function loadDepositHistory() {
+            const deposits = JSON.parse(localStorage.getItem('deposits') || '[]');
+            const userDeposits = deposits.filter(d => d.userId === currentUser.id);
+            
+            const tbody = document.getElementById('deposit-history');
+            tbody.innerHTML = '';
+            
+            userDeposits.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(deposit => {
+                const row = document.createElement('tr');
+                const date = new Date(deposit.createdAt);
+                const statusClass = deposit.status === 'completed' ? 'status-success' : 
+                                  deposit.status === 'pending' ? 'status-pending' : 'status-failed';
+                const statusText = deposit.status === 'completed' ? 'Thành công' : 
+                                 deposit.status === 'pending' ? 'Đang chờ' : 'Thất bại';
+                
+                row.innerHTML = `
+                    <td>${date.toLocaleDateString('vi-VN')} ${date.toLocaleTimeString('vi-VN')}</td>
+                    <td>${formatCurrency(deposit.amount)}</td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            if (userDeposits.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            Chưa có giao dịch nạp tiền nào
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Submit withdraw request
+        function submitWithdraw() {
+            const amount = parseInt(document.getElementById('withdraw-amount').value);
+            const bankName = document.getElementById('bank-name').value;
+            const accountNumber = document.getElementById('account-number').value;
+            
+            if (!amount || amount < 100000 || amount > 5000000) {
+                alert('Số tiền rút phải từ 100K đến 5TR');
+                return;
+            }
+            
+            if (!bankName || !accountNumber) {
+                alert('Vui lòng nhập đầy đủ thông tin ngân hàng');
+                return;
+            }
+            
+            const totalBalance = userData.balance + userData.commission;
+            if (amount > totalBalance) {
+                alert('Số dư không đủ để thực hiện giao dịch');
+                return;
+            }
+            
+            if (userData.deposited < 50000) {
+                alert('Bạn cần nạp tối thiểu 50K để có thể rút tiền');
+                return;
+            }
+            
+            const withdraw = {
+                id: Date.now().toString(),
+                userId: currentUser.id,
+                amount: amount,
+                bankName: bankName,
+                accountNumber: accountNumber,
+                status: 'pending',
+                createdAt: new Date().toISOString()
+            };
+            
+            const withdraws = JSON.parse(localStorage.getItem('withdraws') || '[]');
+            withdraws.push(withdraw);
+            localStorage.setItem('withdraws', JSON.stringify(withdraws));
+            
+            if (amount <= userData.commission) {
+                userData.commission -= amount;
+            } else {
+                const remaining = amount - userData.commission;
+                userData.commission = 0;
+                userData.balance -= remaining;
+            }
+            
+            saveUserData();
+            updateBalances();
+            
+            alert('Đã gửi yêu cầu rút tiền! Vui lòng chờ admin duyệt đơn.');
+            
+            document.getElementById('withdraw-amount').value = '';
+            document.getElementById('bank-name').value = '';
+            document.getElementById('account-number').value = '';
+            
+            loadWithdrawHistory();
+        }
+
+        // Load withdraw history
+        function loadWithdrawHistory() {
+            const withdraws = JSON.parse(localStorage.getItem('withdraws') || '[]');
+            const userWithdraws = withdraws.filter(w => w.userId === currentUser.id);
+            
+            const tbody = document.getElementById('withdraw-history');
+            tbody.innerHTML = '';
+            
+            userWithdraws.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(withdraw => {
+                const row = document.createElement('tr');
+                const date = new Date(withdraw.createdAt);
+                const statusClass = withdraw.status === 'completed' ? 'status-success' : 
+                                   withdraw.status === 'pending' ? 'status-pending' : 'status-failed';
+                const statusText = withdraw.status === 'completed' ? 'Thành công' : 
+                                  withdraw.status === 'pending' ? 'Đang chờ' : 'Đã huỷ';
+                
+                row.innerHTML = `
+                    <td>${date.toLocaleDateString('vi-VN')} ${date.toLocaleTimeString('vi-VN')}</td>
+                    <td>${formatCurrency(withdraw.amount)}</td>
+                    <td>${withdraw.bankName} - ${withdraw.accountNumber}</td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            if (userWithdraws.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            Chưa có giao dịch rút tiền nào
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Save user data
+        function saveUserData() {
+            localStorage.setItem(`userData_${currentUser.id}`, JSON.stringify(userData));
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                document.querySelector('.app-container').style.display = 'none';
+                document.querySelector('.login-container').style.display = 'flex';
+                showLogin();
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('platform-modal').classList.remove('active');
+        }
+
+        // Close level modal
+        function closeLevelModal() {
+            document.getElementById('level-modal').classList.remove('active');
+        }
+
+        // Close task modal
+        function closeTaskModal() {
+            document.getElementById('task-modal').classList.remove('active');
+        }
+
+        // Close modals on outside click
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+
+        // Thêm CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            
+            .transaction-item.new {
+                animation: pulse 0.5s ease;
+                border-left: 3px solid var(--secondary);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
